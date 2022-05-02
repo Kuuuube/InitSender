@@ -1,4 +1,4 @@
-#  PTK 1240 feature setter
+#  InitSender
 
 Accepts Base64 featureinits newline separated including file output from [PTK led sandbox](https://github.com/Kuuuube/PTK-led-sandbox) when using the `no config` option.
 
