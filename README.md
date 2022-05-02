@@ -7,7 +7,7 @@ Run either with or without command line args.
 ## Command line args
 
 ```
-PTK-led-sandbox {tablet model} {init file} {init delay} {tablet vid} {tablet pid}
+InitSender {tablet model} {init file} {init delay} {tablet vid} {tablet pid}
 ```
 
 ### Tablet Model
