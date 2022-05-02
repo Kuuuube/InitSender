@@ -1,6 +1,6 @@
 #  InitSender
 
-Accepts Base64 featureinits newline separated including file output from [PTK led sandbox](https://github.com/Kuuuube/PTK-led-sandbox) when using the `no config` option.
+Accepts newline-separated, base64-encoded feature inits. Including file output from [PTK led sandbox](https://github.com/Kuuuube/PTK-led-sandbox) when using the `no config` option.
 
 Run either with or without command line args.
 
