@@ -7,7 +7,7 @@ Run either with or without command line args.
 ## Command line args
 
 ```
-InitSender {tablet model} {init file} {init delay} {tablet vid} {tablet pid}
+InitSender {tablet model} {init file} {init delay} {auto repeat} {tablet vid} {tablet pid}
 ```
 
 ### Tablet Model
@@ -24,19 +24,27 @@ InitSender {tablet model} {init file} {init delay} {tablet vid} {tablet pid}
 
 ### Init File
 
-Relative or absolute path to file with inits.
+Relative or absolute path to the file containing inits.
 
 ### Init Delay
 
-Integer to use for delay between inits in miliseconds.
+Integer to use for delay between inits in miliseconds. (Use 0 for smoothest animations.)
+
+### Auto Repeat
+
+Whether or not to loop through the init file.
+
+`1`: Auto repeat
+
+`2`: Do not auto repeat
 
 ### Tablet VID
 
-Only used when Tablet Model = 0. Base10 Vendor ID for tablet.
+Base10 integer containing the Vendor ID for tablet. Only used when Tablet Model = 0.
 
 ### Tablet PID
 
-Only used when Tablet Model = 0. Base10 Product ID for tablet.
+Base10 integer containing the Product ID for tablet. Only used when Tablet Model = 0.
 
 ## Building
 

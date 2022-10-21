@@ -14,12 +14,14 @@ namespace InitSender
             int tablet_vid = 1386;
             int tablet_pid = 0;
             int init_delay = 0;
+            int auto_repeat = 1;
 
             if (args.Length != 0)
             {
                 tablet_model = args[0];
                 init_file = args[1];
                 init_delay = Int16.Parse(args[2]);
+                auto_repeat = Int16.Parse(args[3]);
                 switch (tablet_model)
                 {
                     case "1": //PTK-540WL
@@ -35,8 +37,8 @@ namespace InitSender
                         tablet_pid = 187;
                         break;
                     default:
-                        tablet_vid = Int16.Parse(args[3]);
-                        tablet_pid = Int16.Parse(args[4]);
+                        tablet_vid = Int16.Parse(args[4]);
+                        tablet_pid = Int16.Parse(args[5]);
                         break;
                 }
             }
@@ -71,6 +73,8 @@ namespace InitSender
                 init_file = Console.ReadLine();
                 Console.WriteLine("Init delay");
                 init_delay = Int16.Parse(Console.ReadLine());
+                Console.WriteLine("Auto Repeat?\n1. Auto repeat\n2. Do not auto repeat");
+                auto_repeat = Int16.Parse(Console.ReadLine());
             }
 
             string[] features = File.ReadLines(init_file).ToArray();
@@ -98,10 +102,14 @@ namespace InitSender
             {
                 Console.WriteLine("Opened device.");
                 int i = 0;
-                while(true)
+                bool has_repeated = false;
+                while(auto_repeat == 1 || !has_repeated)
                 {
                     if (i >= features.Length)
+                    {
                         i = 0;
+                        has_repeated = true;
+                    }
                     var feature = Convert.FromBase64String(features[i]);
                     hidStream.SetFeature(feature);
                     System.Threading.Thread.Sleep(init_delay);
