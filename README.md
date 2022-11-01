@@ -46,6 +46,10 @@ Base10 integer containing the Vendor ID for tablet. Only used when Tablet Model 
 
 Base10 integer containing the Product ID for tablet. Only used when Tablet Model = 0.
 
+## Dependencies
+
+.Net Runtime 6.0 x64: https://dotnet.microsoft.com/en-us/download/dotnet/6.0
+
 ## Building
 
 ```
