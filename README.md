@@ -1,13 +1,13 @@
 #  InitSender
 
-Accepts newline-separated, base64-encoded feature inits. Including file output from [PTK led sandbox](https://github.com/Kuuuube/PTK-led-sandbox) when using the `no config` option.
+Accepts newline-separated, base64-encoded feature inits or output inits. Including file output from [PTK led sandbox](https://github.com/Kuuuube/PTK-led-sandbox) when using the `no config` option.
 
 Run either with or without command line args.
 
 ## Command line args
 
 ```
-InitSender {tablet model} {init file} {init delay} {auto repeat} {tablet vid} {tablet pid}
+InitSender {tablet model} {init file} {init delay} {auto repeat} {init type} {tablet vid} {tablet pid}
 ```
 
 ### Tablet Model
@@ -24,7 +24,7 @@ InitSender {tablet model} {init file} {init delay} {auto repeat} {tablet vid} {t
 
 ### Init File
 
-Relative or absolute path to the file containing inits.
+Relative or absolute path to the file containing newline-separated, base64-encoded feature inits or output inits.
 
 ### Init Delay
 
@@ -37,6 +37,14 @@ Whether or not to loop through the init file.
 `1`: Auto repeat
 
 `2`: Do not auto repeat
+
+### Init Type
+
+Type of init to send. For Wacom tablets you likely want Feature Init. For Xencelabs tablets you likely want Output Init.
+
+`1`: Feature Init
+
+`2`: Output Init
 
 ### Tablet VID
 
