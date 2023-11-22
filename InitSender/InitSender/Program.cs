@@ -15,6 +15,7 @@ namespace InitSender
             int tablet_pid = 0;
             int init_delay = 0;
             int auto_repeat = 1;
+            int init_type = 1;
 
             if (args.Length != 0)
             {
@@ -22,6 +23,7 @@ namespace InitSender
                 init_file = args[1];
                 init_delay = Int16.Parse(args[2]);
                 auto_repeat = Int16.Parse(args[3]);
+                init_type = Int16.Parse(args[4]);
                 switch (tablet_model)
                 {
                     case "1": //PTK-540WL
@@ -37,8 +39,8 @@ namespace InitSender
                         tablet_pid = 187;
                         break;
                     default:
-                        tablet_vid = Int16.Parse(args[4]);
-                        tablet_pid = Int16.Parse(args[5]);
+                        tablet_vid = Int16.Parse(args[5]);
+                        tablet_pid = Int16.Parse(args[6]);
                         break;
                 }
             }
@@ -75,6 +77,8 @@ namespace InitSender
                 init_delay = Int16.Parse(Console.ReadLine());
                 Console.WriteLine("Auto Repeat?\n1. Auto repeat\n2. Do not auto repeat");
                 auto_repeat = Int16.Parse(Console.ReadLine());
+                Console.WriteLine("Init type\n1. Feature Init\n2. Output Init");
+                init_type = Int16.Parse(Console.ReadLine());
             }
 
             string[] features = File.ReadLines(init_file).ToArray();
@@ -87,7 +91,10 @@ namespace InitSender
             HidDevice tablet = Array.Find(DeviceList.Local.GetHidDevices().ToArray(),
                 delegate (HidDevice d)
                 {
-                    return d.ProductID == tablet_pid && d.VendorID == tablet_vid && d.MaxFeatureReportLength > 0;
+                    if (init_type == 1) {
+                        return d.ProductID == tablet_pid && d.VendorID == tablet_vid && d.MaxFeatureReportLength > 0;
+                    }
+                    return d.ProductID == tablet_pid && d.VendorID == tablet_vid && d.MaxOutputReportLength > 0;
                 }
             );
 
@@ -111,7 +118,11 @@ namespace InitSender
                         has_repeated = true;
                     }
                     var feature = Convert.FromBase64String(features[i]);
-                    hidStream.SetFeature(feature);
+                    if (init_type == 1) {
+                        hidStream.SetFeature(feature);
+                    } else if (init_type == 2) {
+                        hidStream.Write(feature);
+                    }
                     System.Threading.Thread.Sleep(init_delay);
                     i++;
                 }
