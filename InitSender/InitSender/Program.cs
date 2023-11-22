@@ -19,6 +19,10 @@ namespace InitSender
 
             if (args.Length != 0)
             {
+                if (args[0] == "--help" || args[0] == "-help" || args[0] == "-h" || args[0] == "--h") {
+                    Console.WriteLine("# InitSender\nAccepts newline-separated, base64-encoded feature inits or output inits.\nRun either with or without command line args.\n## Command line args\n```\nInitSender {tablet model} {init file} {init delay} {auto repeat} {init type} {tablet vid} {tablet pid}\n```\n### Tablet Model\n`0`: Custom\n`1`: PTK-540WL\n`2`: PTK-640\n`3`: PTK-840\n`4`: PTK-1240\n### Init File\nRelative or absolute path to the file containing newline-separated, base64-encoded feature inits or output inits.\n### Init Delay\nInteger to use for delay between inits in miliseconds. (Use 0 for smoothest animations.)\n### Auto Repeat\nWhether or not to loop through the init file.\n`1`: Auto repeat\n`2`: Do not auto repeat\n### Init Type\nType of init to send. For Wacom tablets you likely want Feature Init. For Xencelabs tablets you likely want Output Init.\n`1`: Feature Init\n`2`: Output Init\n### Tablet VID\nBase10 integer containing the Vendor ID for tablet. Only used when Tablet Model = 0.\n### Tablet PID\nBase10 integer containing the Product ID for tablet. Only used when Tablet Model = 0.");
+                    return;
+                }
                 tablet_model = args[0];
                 init_file = args[1];
                 init_delay = Int16.Parse(args[2]);
